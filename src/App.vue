@@ -1,9 +1,9 @@
 <script setup>
-import WeatherCompositionAssignment from './components/practices/basic/WeatherCompositionAssignment.vue'
+import LifecycleChallenge from './components/practices/basic/LifecycleChallenge.vue'
 </script>
 
 <template>
   <div style="padding: 20px">
-    <WeatherCompositionAssignment />
+    <LifecycleChallenge />
   </div>
 </template>
