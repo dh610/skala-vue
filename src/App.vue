@@ -1,9 +1,9 @@
 <script setup>
-import LifecycleChallenge from './components/practices/basic/LifecycleChallenge.vue'
+import PropsEmitsChallenge from './components/practices/basic/PropsEmitsChallenge.vue'
 </script>
 
 <template>
   <div style="padding: 20px">
-    <LifecycleChallenge />
+    <PropsEmitsChallenge />
   </div>
 </template>
