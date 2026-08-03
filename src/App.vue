@@ -1,9 +1,9 @@
 <script setup>
-import PropsEmitsChallenge from './components/practices/basic/PropsEmitsChallenge.vue'
+import SlotChallenge from './components/practices/basic/SlotChallenge.vue'
 </script>
 
 <template>
   <div style="padding: 20px">
-    <PropsEmitsChallenge />
+    <SlotChallenge />
   </div>
 </template>
