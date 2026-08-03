@@ -1,9 +1,9 @@
 <script setup>
-import SlotChallenge from './components/practices/basic/SlotChallenge.vue'
+import WeatherParent from './components/practices/basic/WeatherParent.vue'
 </script>
 
 <template>
   <div style="padding: 20px">
-    <SlotChallenge />
+    <WeatherParent />
   </div>
 </template>
