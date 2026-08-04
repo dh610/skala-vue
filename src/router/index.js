@@ -30,6 +30,11 @@ const router = createRouter({
       component: () => import('../views/AxiosChallengeView.vue'),
     },
     {
+      path: '/element-plus',
+      name: 'element-plus-challenge',
+      component: () => import('../views/ElementPlusChallengeView.vue'),
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: () => import('../views/NotFoundView.vue'),
