@@ -31,9 +31,10 @@ function showDetails(cityId) {
     </BaseDashboardCard>
 
     <BaseDashboardCard title="🌆 지역별 날씨 현황">
-      <p v-if="filteredWeatherList.length === 0" class="empty-state">
-        검색 결과와 일치하는 도시가 없습니다.
-      </p>
+      <ElEmpty
+        v-if="filteredWeatherList.length === 0"
+        description="검색 결과와 일치하는 도시가 없습니다."
+      />
       <div v-else class="weather-list">
         <WeatherCard
           v-for="weather in filteredWeatherList"
@@ -44,7 +45,7 @@ function showDetails(cityId) {
       </div>
     </BaseDashboardCard>
 
-    <p class="guide-message">카드를 클릭하거나 검색해 보세요.</p>
+    <ElAlert title="카드를 선택하거나 도시를 검색해 보세요." type="success" :closable="false" />
   </main>
 </template>
 
@@ -65,18 +66,4 @@ function showDetails(cityId) {
   font-size: 14px;
 }
 
-.guide-message {
-  margin: 0;
-  padding: 12px;
-  background: #eaf7e9;
-  color: #267142;
-  text-align: center;
-}
-
-.empty-state {
-  margin: 0;
-  padding: 24px 12px;
-  color: #52616f;
-  text-align: center;
-}
 </style>

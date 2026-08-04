@@ -7,7 +7,7 @@ const configStore = useConfigStore()
 <template>
   <div class="unit-toggler">
     <span>날씨 단위: {{ configStore.unitSymbol }}</span>
-    <button type="button" @click="configStore.toggleUnit">단위 변경</button>
+    <ElButton type="primary" size="small" @click="configStore.toggleUnit">단위 변경</ElButton>
   </div>
 </template>
 
@@ -21,18 +21,4 @@ const configStore = useConfigStore()
   font-size: 14px;
 }
 
-button {
-  min-height: 34px;
-  padding: 5px 9px;
-  border: 1px solid #3973ac;
-  border-radius: 4px;
-  background: #3973ac;
-  color: #fff;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #2d6397;
-}
 </style>

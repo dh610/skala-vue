@@ -19,29 +19,28 @@ const displayTemperature = computed(() => {
 </script>
 
 <template>
-  <article class="weather-card">
+  <ElCard class="weather-card" shadow="hover">
     <div>
       <h3>{{ weather.name }} <span>({{ weather.condition }})</span></h3>
       <p>현재 기온: {{ displayTemperature }}{{ configStore.unitSymbol }}</p>
-      <span class="temperature-label" :class="weather.temperature >= 25 ? 'hot' : 'mild'">
-        {{ weather.temperature >= 25 ? '🔥 더움' : '❄️ 선선함' }}
-      </span>
+      <ElTag :type="weather.temperature >= 25 ? 'danger' : 'primary'" effect="dark">
+        {{ weather.temperature >= 25 ? '더움' : '선선함' }}
+      </ElTag>
     </div>
-    <button type="button" @click="$emit('show-detail', weather.id)">상세보기</button>
-  </article>
+    <ElButton type="primary" plain @click="$emit('show-detail', weather.id)">상세보기</ElButton>
+  </ElCard>
 </template>
 
 <style scoped>
 .weather-card {
+  min-height: 112px;
+}
+
+.weather-card :deep(.el-card__body) {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 14px;
-  min-height: 104px;
-  padding: 15px;
-  border: 1px solid #cfd6dd;
-  border-radius: 6px;
-  background: #fff;
 }
 
 h3,
@@ -60,39 +59,11 @@ p {
 }
 
 p {
-  margin-top: 6px;
-}
-
-.temperature-label {
-  display: inline-block;
-  margin-top: 7px;
-  padding: 3px 7px;
-  border-radius: 3px;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.temperature-label.hot {
-  background: #ff6868;
-}
-
-.temperature-label.mild {
-  background: #58aaf4;
-}
-
-button {
-  min-height: 36px;
-  padding: 6px 10px;
-  border: 1px solid #3973ac;
-  border-radius: 4px;
-  background: #3973ac;
-  color: #fff;
-  cursor: pointer;
+  margin: 6px 0;
 }
 
 @media (max-width: 480px) {
-  .weather-card {
+  .weather-card :deep(.el-card__body) {
     grid-template-columns: 1fr;
   }
 }

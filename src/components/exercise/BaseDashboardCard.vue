@@ -8,23 +8,15 @@ defineProps({
 </script>
 
 <template>
-  <section class="dashboard-card">
-    <h2>{{ title }}</h2>
+  <ElCard class="dashboard-card" shadow="never">
+    <template #header><strong>{{ title }}</strong></template>
     <slot></slot>
-  </section>
+  </ElCard>
 </template>
 
 <style scoped>
-.dashboard-card {
-  padding: 18px;
-  border: 1px solid #d7dce2;
-  border-radius: 8px;
-  background: #f4f5f6;
-}
-
-h2 {
-  margin: 0 0 14px;
-  font-size: 18px;
+.dashboard-card :deep(.el-card__header) strong {
+  font-size: 17px;
   font-weight: 700;
 }
 </style>

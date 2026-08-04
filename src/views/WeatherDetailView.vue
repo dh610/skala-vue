@@ -30,18 +30,22 @@ const displayTemperature = computed(() => {
     <template v-if="weather">
       <p class="eyebrow">지역 상세 기상관측</p>
       <h1>{{ weather.name }}</h1>
-      <dl>
-        <div><dt>날씨</dt><dd>{{ weather.condition }}</dd></div>
-        <div><dt>기온</dt><dd>{{ displayTemperature }}{{ configStore.unitSymbol }}</dd></div>
-        <div><dt>습도</dt><dd>{{ weather.humidity }}%</dd></div>
-        <div><dt>풍속</dt><dd>{{ weather.wind }}m/s</dd></div>
-      </dl>
+      <ElDescriptions :column="2" border>
+        <ElDescriptionsItem label="날씨">{{ weather.condition }}</ElDescriptionsItem>
+        <ElDescriptionsItem label="기온">
+          {{ displayTemperature }}{{ configStore.unitSymbol }}
+        </ElDescriptionsItem>
+        <ElDescriptionsItem label="습도">{{ weather.humidity }}%</ElDescriptionsItem>
+        <ElDescriptionsItem label="풍속">{{ weather.wind }}m/s</ElDescriptionsItem>
+      </ElDescriptions>
     </template>
     <template v-else>
       <h1>도시 정보를 찾을 수 없습니다</h1>
       <p>요청한 도시 코드에 해당하는 날씨 데이터가 없습니다.</p>
     </template>
-    <RouterLink class="back-link" to="/">메인 대시보드로 돌아가기</RouterLink>
+    <RouterLink class="back-link" to="/">
+      <ElButton type="primary" plain>메인 대시보드로 돌아가기</ElButton>
+    </RouterLink>
   </main>
 </template>
 
@@ -65,36 +69,9 @@ h1 {
   font-weight: 800;
 }
 
-dl {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin: 0 0 24px;
-}
-
-dl div {
-  padding: 14px;
-  background: #f3f6f8;
-}
-
-dt {
-  color: #52616f;
-  font-size: 13px;
-}
-
-dd {
-  margin: 4px 0 0;
-  font-size: 18px;
-  font-weight: 700;
-}
-
 .back-link {
+  display: inline-block;
+  margin-top: 20px;
   font-weight: 700;
-}
-
-@media (max-width: 600px) {
-  dl {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 </style>
