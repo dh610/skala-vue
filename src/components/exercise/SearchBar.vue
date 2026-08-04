@@ -10,7 +10,6 @@ defineEmits(['update:modelValue'])
 </script>
 
 <template>
-  <label for="city-search">도시 검색</label>
   <input
     id="city-search"
     type="search"
@@ -21,14 +20,6 @@ defineEmits(['update:modelValue'])
 </template>
 
 <style scoped>
-label {
-  display: block;
-  margin-bottom: 6px;
-  color: #52616f;
-  font-size: 13px;
-  font-weight: 700;
-}
-
 input {
   width: 100%;
   min-height: 42px;

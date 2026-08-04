@@ -1,12 +1,19 @@
+<script setup>
+import UnitToggler from './components/exercise/UnitToggler.vue'
+</script>
+
 <template>
   <div class="app-shell">
     <header class="site-header">
-      <RouterLink class="brand" to="/">SKALA Weather</RouterLink>
-      <nav aria-label="주요 메뉴">
-        <RouterLink to="/">날씨</RouterLink>
-        <RouterLink to="/counter">Pinia 카운터</RouterLink>
-        <RouterLink to="/about">서비스 소개</RouterLink>
-      </nav>
+      <RouterLink class="brand" to="/">🌤 종합실습 5: 스토어적용</RouterLink>
+      <div class="navigation-bar">
+        <nav aria-label="주요 메뉴">
+          <RouterLink to="/">🌦 날씨 대시보드</RouterLink>
+          <RouterLink to="/about">ℹ️ 서비스 소개</RouterLink>
+          <RouterLink to="/counter">Pinia 카운터</RouterLink>
+        </nav>
+        <UnitToggler />
+      </div>
     </header>
 
     <RouterView />
@@ -20,18 +27,26 @@
 }
 
 .site-header {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.navigation-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 28px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid #d7dce2;
+  gap: 16px;
+  padding: 13px 16px;
+  border: 1px solid #d7dce2;
+  border-radius: 6px;
+  background: #fff;
 }
 
 .brand {
-  color: #1f4f78;
-  font-size: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #d7dce2;
+  color: #202830;
+  font-size: 21px;
   font-weight: 800;
 }
 
@@ -43,7 +58,7 @@ nav {
 nav a {
   padding: 7px 10px;
   border-radius: 4px;
-  color: #52616f;
+  color: #697581;
   font-weight: 700;
 }
 
@@ -53,9 +68,17 @@ nav a.router-link-exact-active {
 }
 
 @media (max-width: 520px) {
-  .site-header {
+  .navigation-bar {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  nav {
+    flex-wrap: wrap;
+  }
+
+  .unit-toggler {
+    margin-left: 0;
   }
 }
 </style>

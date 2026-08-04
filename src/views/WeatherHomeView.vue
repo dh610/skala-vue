@@ -11,8 +11,6 @@ const weatherList = [
   { id: 'city-01', name: '서울', temperature: 28, condition: '맑음' },
   { id: 'city-02', name: '수원', temperature: 24, condition: '비' },
   { id: 'city-03', name: '부산', temperature: 26, condition: '구름' },
-  { id: 'city-04', name: '대구', temperature: 22, condition: '흐림' },
-  { id: 'city-05', name: '제주', temperature: 30, condition: '맑음' },
 ]
 
 const filteredWeatherList = computed(() => {
@@ -27,16 +25,12 @@ function showDetails(cityId) {
 
 <template>
   <main class="weather-page">
-    <header>
-      <p>Vue Router Assignment</p>
-      <h1>지역별 날씨</h1>
-    </header>
-
-    <BaseDashboardCard title="도시 검색">
+    <BaseDashboardCard title="🔍 도시 검색 (한글 즉시 동기화)">
       <SearchBar v-model="searchQuery" />
+      <p class="search-status">검색 중인 도시: {{ searchQuery }}</p>
     </BaseDashboardCard>
 
-    <BaseDashboardCard title="날씨 현황">
+    <BaseDashboardCard title="🌆 지역별 날씨 현황">
       <p v-if="filteredWeatherList.length === 0" class="empty-state">
         검색 결과와 일치하는 도시가 없습니다.
       </p>
@@ -49,6 +43,8 @@ function showDetails(cityId) {
         />
       </div>
     </BaseDashboardCard>
+
+    <p class="guide-message">카드를 클릭하거나 검색해 보세요.</p>
   </main>
 </template>
 
@@ -58,23 +54,23 @@ function showDetails(cityId) {
   gap: 16px;
 }
 
-header p {
-  margin: 0 0 4px;
-  color: #52616f;
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-h1 {
-  margin: 0;
-  font-size: 28px;
-  font-weight: 800;
-}
-
 .weather-list {
   display: grid;
   gap: 10px;
+}
+
+.search-status {
+  margin: 8px 0 0;
+  color: #52616f;
+  font-size: 14px;
+}
+
+.guide-message {
+  margin: 0;
+  padding: 12px;
+  background: #eaf7e9;
+  color: #267142;
+  text-align: center;
 }
 
 .empty-state {

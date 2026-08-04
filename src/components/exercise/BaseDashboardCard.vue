@@ -19,7 +19,7 @@ defineProps({
   padding: 18px;
   border: 1px solid #d7dce2;
   border-radius: 8px;
-  background: #fff;
+  background: #f4f5f6;
 }
 
 h2 {

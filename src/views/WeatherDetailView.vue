@@ -1,8 +1,10 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { useConfigStore } from '../stores/configStore.js'
 
 const route = useRoute()
+const configStore = useConfigStore()
 const weatherList = [
   { id: 'city-01', name: '서울', temperature: 28, condition: '맑음', humidity: 58, wind: 2.4 },
   { id: 'city-02', name: '수원', temperature: 24, condition: '비', humidity: 82, wind: 3.1 },
@@ -12,6 +14,15 @@ const weatherList = [
 ]
 
 const weather = computed(() => weatherList.find((city) => city.id === route.params.cityId))
+const displayTemperature = computed(() => {
+  const celsius = weather.value?.temperature
+
+  if (celsius === undefined) {
+    return ''
+  }
+
+  return configStore.unit === 'fahrenheit' ? Math.round((celsius * 9) / 5 + 32) : celsius
+})
 </script>
 
 <template>
@@ -21,7 +32,7 @@ const weather = computed(() => weatherList.find((city) => city.id === route.para
       <h1>{{ weather.name }}</h1>
       <dl>
         <div><dt>날씨</dt><dd>{{ weather.condition }}</dd></div>
-        <div><dt>기온</dt><dd>{{ weather.temperature }}°C</dd></div>
+        <div><dt>기온</dt><dd>{{ displayTemperature }}{{ configStore.unitSymbol }}</dd></div>
         <div><dt>습도</dt><dd>{{ weather.humidity }}%</dd></div>
         <div><dt>풍속</dt><dd>{{ weather.wind }}m/s</dd></div>
       </dl>
