@@ -35,6 +35,11 @@ const router = createRouter({
       component: () => import('../views/ElementPlusChallengeView.vue'),
     },
     {
+      path: '/modern-js',
+      name: 'modern-javascript-challenge',
+      component: () => import('../views/ModernJavaScriptChallengeView.vue'),
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: () => import('../views/NotFoundView.vue'),
