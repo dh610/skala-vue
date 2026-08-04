@@ -4,6 +4,7 @@
       <RouterLink class="brand" to="/">SKALA Weather</RouterLink>
       <nav aria-label="주요 메뉴">
         <RouterLink to="/">날씨</RouterLink>
+        <RouterLink to="/counter">Pinia 카운터</RouterLink>
         <RouterLink to="/about">서비스 소개</RouterLink>
       </nav>
     </header>
