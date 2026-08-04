@@ -11,6 +11,7 @@ import UnitToggler from './components/exercise/UnitToggler.vue'
           <RouterLink to="/">🌦 날씨 대시보드</RouterLink>
           <RouterLink to="/about">ℹ️ 서비스 소개</RouterLink>
           <RouterLink to="/counter">Pinia 카운터</RouterLink>
+          <RouterLink to="/axios">Axios 실습</RouterLink>
         </nav>
         <UnitToggler />
       </div>

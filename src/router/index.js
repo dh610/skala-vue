@@ -25,6 +25,11 @@ const router = createRouter({
       component: () => import('../components/practices/library/StoreCounter.vue'),
     },
     {
+      path: '/axios',
+      name: 'axios-challenge',
+      component: () => import('../views/AxiosChallengeView.vue'),
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: () => import('../views/NotFoundView.vue'),
