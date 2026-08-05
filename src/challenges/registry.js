@@ -247,18 +247,6 @@ export const challengeChapters = [
         hint: '메인 대시보드가 이 과제의 결과물입니다.',
         links: [{ label: '메인 대시보드에서 확인', to: '/' }],
       },
-      {
-        id: 'assignment-modern-js',
-        title: '과제 8. Modern JS 확장',
-        subtitle: '메뉴와 API 확장',
-        requirements: [
-          '메뉴를 추가하고 활용 API를 추가해서 과제를 확장',
-          '외부 API 호출 결과를 비구조화 할당과 옵셔널 체이닝으로 가공',
-          '표 형태로 가공 결과 표시',
-        ],
-        hint: 'Modern JavaScript 화면의 [활용 API] 탭에서 확인할 수 있습니다.',
-        loader: () => import('../views/ModernJavaScriptChallengeView.vue'),
-      },
     ],
   },
 ]
