@@ -16,7 +16,7 @@ const themeClass = ref('bg-dark')
 const textColor = ref('purple')
 const boxWidth = ref(150)
 const baseBoxStyle = ref({
-  backgroundColor: '#42b883',
+  backgroundColor: 'var(--accent)',
   height: '100px',
   transition: 'all 0.3s ease',
 })
@@ -52,8 +52,6 @@ function showXssMessage() {
 
 <template>
   <main class="challenge-page">
-    <h1>Vue Directive Code Challenge</h1>
-
     <section class="practice-section">
       <h2>v-html 디렉티브 학습</h2>
       <h3>일반 보간법 사용 결과:</h3>
@@ -200,7 +198,7 @@ function showXssMessage() {
       <h2>v-memo 디렉티브 학습</h2>
       <div
         v-memo="[memoName]"
-        style="padding: 20px; border: 1px solid #42b883; margin-bottom: 10px"
+        style="padding: 20px; border: 1px solid var(--accent); margin-bottom: 10px"
       >
         <p>v-memo 적용 영역 (기준: memoName)</p>
         <p>이름: {{ memoName }}</p>
@@ -213,18 +211,6 @@ function showXssMessage() {
 </template>
 
 <style scoped>
-.challenge-page {
-  display: grid;
-  gap: 20px;
-  padding: 20px;
-}
-
-.practice-section {
-  padding: 16px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-}
-
 .practice-section button,
 .practice-section input {
   margin: 4px;
@@ -246,7 +232,7 @@ function showXssMessage() {
 .bg-dark {
   padding: 15px;
   color: white;
-  background-color: #333;
+  background-color: var(--ink);
 }
 
 .border-red {
@@ -254,7 +240,7 @@ function showXssMessage() {
 }
 
 .border-gray {
-  border: 3px solid #ccc;
+  border: 3px solid var(--line);
 }
 
 .box-label {
@@ -285,8 +271,8 @@ function showXssMessage() {
   padding: 10px;
   margin-top: 5px;
   color: white;
-  border-radius: 5px;
-  background-color: #3498db;
+  border-radius: var(--r-sm);
+  background-color: var(--cool);
 }
 
 [v-cloak] {
@@ -296,6 +282,6 @@ function showXssMessage() {
 .memo-box {
   padding: 20px;
   margin-bottom: 10px;
-  border: 1px solid #42b883;
+  border: 1px solid var(--accent);
 }
 </style>

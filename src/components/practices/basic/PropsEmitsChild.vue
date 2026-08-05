@@ -30,9 +30,9 @@ function sendNotification() {
 <style scoped>
 .child-panel {
   padding: 18px;
-  border: 1px solid #9eb6ca;
-  border-radius: 8px;
-  background: #f2f7fb;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--canvas);
 }
 
 .panel-heading {
@@ -44,9 +44,9 @@ function sendNotification() {
 
 .panel-heading span {
   padding: 3px 7px;
-  border-radius: 4px;
-  background: #3973ac;
-  color: #ffffff;
+  border-radius: var(--r-sm);
+  background: var(--accent);
+  color: var(--paper);
   font-size: 12px;
   font-weight: 700;
 }
@@ -61,7 +61,7 @@ h2 {
 }
 
 .data-label {
-  color: #52616f;
+  color: var(--ink-soft);
   font-size: 13px;
   font-weight: 700;
 }
@@ -70,23 +70,23 @@ h2 {
   min-height: 46px;
   margin: 6px 0 14px;
   padding: 11px;
-  border: 1px solid #c9d8e5;
-  border-radius: 4px;
-  background: #ffffff;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--paper);
   font-weight: 700;
 }
 
 button {
   min-height: 38px;
   padding: 7px 12px;
-  border: 1px solid #3973ac;
-  border-radius: 4px;
-  background: #3973ac;
-  color: #ffffff;
+  border: 1px solid var(--accent);
+  border-radius: var(--r-sm);
+  background: var(--accent);
+  color: var(--paper);
   cursor: pointer;
 }
 
 button:hover {
-  background: #2c6092;
+  background: var(--accent-dark);
 }
 </style>

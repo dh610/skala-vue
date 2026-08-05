@@ -37,12 +37,12 @@ function removeReactiveItem(index) {
 
 <template>
   <main class="challenge-page">
-    <h1>107페이지 Code Challenge</h1>
-
     <section class="practice-section">
       <h2>반응형 상태 ref() 기초</h2>
 
-      <p>Ref 카운트: <strong>{{ count }}</strong></p>
+      <p>
+        Ref 카운트: <strong>{{ count }}</strong>
+      </p>
       <label>
         이름:
         <input v-model="name" type="text" />
@@ -82,24 +82,10 @@ function removeReactiveItem(index) {
 </template>
 
 <style scoped>
-.challenge-page {
-  display: grid;
-  gap: 16px;
-  width: min(100%, 760px);
-  margin: 0 auto;
-}
-
-.practice-section {
-  padding: 18px;
-  border: 1px solid #d7dce2;
-  border-radius: 8px;
-  background: #ffffff;
-}
-
 h1,
 h2,
 h3 {
-  color: #1f2933;
+  color: var(--ink);
 }
 
 h1 {
@@ -121,29 +107,22 @@ input {
   width: min(100%, 240px);
   margin-left: 8px;
   padding: 6px 8px;
-  border: 1px solid #9ca3af;
-  border-radius: 4px;
-}
-
-.button-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 14px;
+  border: 1px solid var(--muted);
+  border-radius: var(--r-sm);
 }
 
 button {
   min-height: 34px;
   padding: 6px 10px;
-  border: 1px solid #9ca3af;
-  border-radius: 4px;
-  background: #f7f8fa;
-  color: #1f2933;
+  border: 1px solid var(--muted);
+  border-radius: var(--r-sm);
+  background: var(--canvas);
+  color: var(--ink);
   cursor: pointer;
 }
 
 button:hover {
-  background: #e9eef3;
+  background: var(--line);
 }
 
 ul {

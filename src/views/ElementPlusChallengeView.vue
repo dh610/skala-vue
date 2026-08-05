@@ -63,8 +63,6 @@ onBeforeUnmount(() => {
 
 <template>
   <main class="challenge-page">
-    <h1>Element Plus Code Challenge</h1>
-
     <ElCard shadow="never">
       <template #header><strong>실습 1. 회원가입 Form & 입력 제어</strong></template>
       <ElForm label-width="130px" @submit.prevent="handleRegister">
@@ -106,17 +104,15 @@ onBeforeUnmount(() => {
           데이터 동기화 시작
         </ElButton>
       </div>
-      <ElProgress :percentage="downloadProgress" :status="downloadProgress === 100 ? 'success' : ''" />
+      <ElProgress
+        :percentage="downloadProgress"
+        :status="downloadProgress === 100 ? 'success' : ''"
+      />
     </ElCard>
   </main>
 </template>
 
 <style scoped>
-.challenge-page {
-  display: grid;
-  gap: 18px;
-}
-
 h1 {
   margin: 0;
   font-size: 28px;
@@ -125,7 +121,7 @@ h1 {
 
 .control-description {
   margin-left: 10px;
-  color: #52616f;
+  color: var(--ink-soft);
 }
 
 .full-button {
@@ -145,7 +141,7 @@ h1 {
 }
 
 .hint {
-  color: #6b7785;
+  color: var(--muted);
 }
 
 .feedback-actions {

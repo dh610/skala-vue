@@ -103,12 +103,13 @@ const missions = [
 
 <template>
   <main class="quiz-container">
-    <h1>Modern JavaScript Code Challenge</h1>
     <ElSegmented v-model="activeMenu" :options="menuOptions" />
 
     <template v-if="activeMenu === 'missions'">
       <ElCard v-for="mission in missions" :key="mission.id" shadow="never">
-        <template #header><strong>{{ mission.title }}</strong></template>
+        <template #header
+          ><strong>{{ mission.title }}</strong></template
+        >
         <ElButton type="primary" @click="mission.run">{{ mission.button }}</ElButton>
         <div class="console">결과창 {{ mission.id }}: {{ mission.result.value }}</div>
       </ElCard>
@@ -140,26 +141,10 @@ const missions = [
 </template>
 
 <style scoped>
-.quiz-container {
-  display: grid;
-  gap: 18px;
-}
-
 h1 {
   margin: 0;
   font-size: 28px;
   font-weight: 800;
-}
-
-.console {
-  min-height: 52px;
-  margin-top: 14px;
-  padding: 14px;
-  border-radius: 4px;
-  background: #282828;
-  color: #7ed957;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  overflow-wrap: anywhere;
 }
 
 .api-status {

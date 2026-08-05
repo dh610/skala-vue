@@ -7,7 +7,6 @@ const counterStore = useCounterStore()
 <template>
   <main class="counter-page">
     <p class="eyebrow">Pinia Code Challenge</p>
-    <h1>Counter Store 활용 실습</h1>
 
     <section class="counter-panel">
       <div class="counter-value">
@@ -33,10 +32,9 @@ const counterStore = useCounterStore()
 
 .eyebrow {
   margin: 0 0 4px;
-  color: #52616f;
+  color: var(--ink-soft);
   font-size: 13px;
   font-weight: 700;
-  text-transform: uppercase;
 }
 
 h1 {
@@ -50,9 +48,9 @@ h1 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   padding: 20px;
-  border: 1px solid #d7dce2;
-  border-radius: 8px;
-  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--paper);
 }
 
 .counter-value {
@@ -60,16 +58,16 @@ h1 {
   gap: 8px;
   min-width: 0;
   padding: 16px;
-  background: #f3f6f8;
+  background: var(--canvas);
 }
 
 .counter-value span {
-  color: #52616f;
+  color: var(--ink-soft);
   font-size: 14px;
 }
 
 .counter-value strong {
-  color: #1f4f78;
+  color: var(--accent-dark);
   font-size: 32px;
   font-weight: 800;
 }
@@ -77,17 +75,17 @@ h1 {
 button {
   grid-column: 1 / -1;
   min-height: 42px;
-  border: 1px solid #3973ac;
-  border-radius: 4px;
-  background: #3973ac;
-  color: #fff;
+  border: 1px solid var(--accent);
+  border-radius: var(--r-sm);
+  background: var(--accent);
+  color: var(--paper);
   font-size: 15px;
   font-weight: 700;
   cursor: pointer;
 }
 
 button:hover {
-  background: #2d6397;
+  background: var(--accent-dark);
 }
 
 @media (max-width: 520px) {

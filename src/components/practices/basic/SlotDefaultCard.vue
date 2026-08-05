@@ -10,13 +10,13 @@
 .slot-card {
   min-height: 74px;
   padding: 16px;
-  border: 1px solid #cfd6dd;
-  border-radius: 6px;
-  background: #ffffff;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--paper);
 }
 
 .fallback {
   margin: 0;
-  color: #5d6772;
+  color: var(--ink-soft);
 }
 </style>

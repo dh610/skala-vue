@@ -83,8 +83,12 @@ onMounted(handleRead)
           <p>{{ item.title }}</p>
         </div>
         <div class="item-actions">
-          <button class="update-button" type="button" @click="handleUpdate(item)">PUT (수정)</button>
-          <button class="delete-button" type="button" @click="handleDelete(item)">DEL (삭제)</button>
+          <button class="update-button" type="button" @click="handleUpdate(item)">
+            PUT (수정)
+          </button>
+          <button class="delete-button" type="button" @click="handleDelete(item)">
+            DEL (삭제)
+          </button>
         </div>
       </li>
     </ul>
@@ -92,17 +96,10 @@ onMounted(handleRead)
 </template>
 
 <style scoped>
-.practice-section {
-  padding: 20px;
-  border: 1px solid #d7dce2;
-  border-radius: 8px;
-  background: #fff;
-}
-
 h2 {
   margin: 0 0 16px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #d7dce2;
+  border-bottom: 1px solid var(--line);
   font-size: 20px;
   font-weight: 800;
 }
@@ -117,8 +114,8 @@ input {
   min-width: 0;
   min-height: 40px;
   padding: 8px 10px;
-  border: 1px solid #929da8;
-  border-radius: 4px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
   font-size: 15px;
 }
 
@@ -126,22 +123,22 @@ button {
   min-height: 36px;
   padding: 6px 10px;
   border: 0;
-  border-radius: 4px;
-  color: #fff;
+  border-radius: var(--r-sm);
+  color: var(--paper);
   font-weight: 700;
   cursor: pointer;
 }
 
 .create-button {
-  background: #2ca45c;
+  background: var(--accent);
 }
 
 .update-button {
-  background: #d9a900;
+  background: var(--warn);
 }
 
 .delete-button {
-  background: #e5484d;
+  background: var(--danger);
 }
 
 .item-list {
@@ -158,13 +155,13 @@ li {
   align-items: center;
   gap: 12px;
   padding: 13px;
-  border: 1px solid #d7dce2;
-  border-radius: 6px;
-  background: #f6f7f9;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--canvas);
 }
 
 small {
-  color: #52616f;
+  color: var(--ink-soft);
 }
 
 li p {
@@ -177,14 +174,9 @@ li p {
   gap: 6px;
 }
 
-.loading-message,
-.error-message {
+.loading-message {
   margin: 14px 0 0;
-}
-
-.error-message {
-  color: #a13c28;
-  font-weight: 700;
+  color: var(--muted);
 }
 
 @media (max-width: 580px) {

@@ -22,11 +22,6 @@ function handleUpdateRequest(newValue) {
 
 <template>
   <main class="challenge-page">
-    <header>
-      <p>Vue Component Communication</p>
-      <h1>152페이지 Props &amp; Emits Challenge</h1>
-    </header>
-
     <section class="parent-panel">
       <div class="panel-heading">
         <span>Parent</span>
@@ -59,20 +54,11 @@ function handleUpdateRequest(newValue) {
 </template>
 
 <style scoped>
-.challenge-page {
-  display: grid;
-  gap: 16px;
-  width: min(100%, 780px);
-  margin: 0 auto;
-  color: #202830;
-}
-
 header p {
   margin: 0 0 4px;
-  color: #52616f;
+  color: var(--ink-soft);
   font-size: 13px;
   font-weight: 700;
-  text-transform: uppercase;
 }
 
 h1 {
@@ -82,9 +68,9 @@ h1 {
 
 .parent-panel {
   padding: 20px;
-  border: 1px solid #8fbda9;
-  border-radius: 8px;
-  background: #f4faf7;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--canvas);
 }
 
 .panel-heading {
@@ -96,9 +82,9 @@ h1 {
 
 .panel-heading span {
   padding: 3px 7px;
-  border-radius: 4px;
-  background: #168a65;
-  color: #ffffff;
+  border-radius: var(--r-sm);
+  background: var(--ok);
+  color: var(--paper);
   font-size: 12px;
   font-weight: 700;
 }
@@ -114,7 +100,7 @@ h2 {
 
 .state-label,
 .parent-controls label {
-  color: #52616f;
+  color: var(--ink-soft);
   font-size: 13px;
   font-weight: 700;
 }
@@ -123,9 +109,9 @@ h2 {
   min-height: 46px;
   margin-top: 6px;
   padding: 11px;
-  border: 1px solid #c5ddd2;
-  border-radius: 4px;
-  background: #ffffff;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--paper);
   font-weight: 700;
 }
 
@@ -147,26 +133,26 @@ h2 {
 input,
 button {
   min-height: 38px;
-  border: 1px solid #8d99a5;
-  border-radius: 4px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
 }
 
 input {
   min-width: 0;
   padding: 7px 9px;
-  background: #ffffff;
-  color: #202830;
+  background: var(--paper);
+  color: var(--ink);
 }
 
 button {
   padding: 7px 12px;
-  background: #ffffff;
-  color: #202830;
+  background: var(--paper);
+  color: var(--ink);
   cursor: pointer;
 }
 
 button:hover {
-  background: #e9f0ed;
+  background: var(--canvas-deep);
 }
 
 .direction-label {
@@ -174,7 +160,7 @@ button:hover {
   justify-content: space-between;
   gap: 12px;
   margin: 18px 4px 8px;
-  color: #52616f;
+  color: var(--ink-soft);
   font-size: 12px;
   font-weight: 700;
 }
@@ -182,8 +168,8 @@ button:hover {
 .event-status {
   margin-top: 14px;
   padding: 10px;
-  border-left: 4px solid #168a65;
-  background: #ffffff;
+  border-left: 4px solid var(--ok);
+  background: var(--paper);
 }
 
 @media (max-width: 520px) {

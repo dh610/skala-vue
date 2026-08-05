@@ -4,19 +4,19 @@ import UnitToggler from './components/exercise/UnitToggler.vue'
 
 <template>
   <div class="app-shell">
-    <header class="site-header">
-      <RouterLink class="brand" to="/">🌤 종합실습 5: 스토어적용</RouterLink>
-      <div class="navigation-bar">
-        <nav aria-label="주요 메뉴">
-          <RouterLink to="/">🌦 날씨 대시보드</RouterLink>
-          <RouterLink to="/about">ℹ️ 서비스 소개</RouterLink>
-          <RouterLink to="/counter">Pinia 카운터</RouterLink>
-          <RouterLink to="/axios">Axios 실습</RouterLink>
-          <RouterLink to="/element-plus">Element Plus</RouterLink>
-          <RouterLink to="/modern-js">Modern JS</RouterLink>
-        </nav>
-        <UnitToggler />
-      </div>
+    <header class="masthead">
+      <RouterLink class="wordmark" to="/">
+        <span class="wordmark__mark" aria-hidden="true"></span>
+        <span class="wordmark__text"> SKALA <em>기상관측</em> </span>
+      </RouterLink>
+
+      <nav aria-label="주요 메뉴">
+        <RouterLink to="/">날씨</RouterLink>
+        <RouterLink to="/challenges">Code Challenges</RouterLink>
+        <RouterLink to="/about">소개</RouterLink>
+      </nav>
+
+      <UnitToggler />
     </header>
 
     <RouterView />
@@ -25,62 +25,100 @@ import UnitToggler from './components/exercise/UnitToggler.vue'
 
 <style scoped>
 .app-shell {
-  width: min(100%, 860px);
-  margin: 0 auto;
-}
-
-.site-header {
   display: grid;
-  gap: 14px;
-  margin-bottom: 28px;
+  gap: var(--s5);
 }
 
-.navigation-bar {
+/* 마스트헤드: 종이 위 헤어라인 (참조의 sticky 헤어라인 장르는 공유, 배치·마크는 다르게) */
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 13px 16px;
-  border: 1px solid #d7dce2;
-  border-radius: 6px;
-  background: #fff;
+  gap: var(--s3);
+  padding: var(--s2) 0;
+  border-bottom: 1px solid var(--line-strong);
+  background: color-mix(in srgb, var(--canvas) 88%, transparent);
+  backdrop-filter: blur(8px);
 }
 
-.brand {
-  padding-bottom: 12px;
-  border-bottom: 1px solid #d7dce2;
-  color: #202830;
-  font-size: 21px;
+/* 워드마크: 오커 사각 마크 + "SKALA" + serif "기상관측" */
+.wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  color: var(--ink);
+}
+
+.wordmark:hover {
+  text-decoration: none;
+}
+
+.wordmark__mark {
+  align-self: center;
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+}
+
+.wordmark__text {
+  font-size: 19px;
   font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.wordmark__text em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0;
 }
 
 nav {
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: var(--s3);
+  margin-left: auto;
 }
 
 nav a {
-  padding: 7px 10px;
-  border-radius: 4px;
-  color: #697581;
+  position: relative;
+  padding: 4px 0;
+  color: var(--ink-soft);
+  font-size: 14px;
   font-weight: 700;
 }
 
-nav a.router-link-exact-active {
-  background: #e9f2f8;
-  color: #1f4f78;
+nav a:hover {
+  color: var(--ink);
+  text-decoration: none;
 }
 
-@media (max-width: 520px) {
-  .navigation-bar {
-    align-items: flex-start;
-    flex-direction: column;
+/* 활성: 오커 언더라인 마커 (참조의 검정 언더라인과 색으로 구분) */
+nav a.router-link-active {
+  color: var(--ink);
+}
+
+nav a.router-link-active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: var(--accent);
+}
+
+@media (max-width: 680px) {
+  .masthead {
+    flex-wrap: wrap;
+    gap: var(--s2);
   }
 
   nav {
-    flex-wrap: wrap;
-  }
-
-  .unit-toggler {
+    order: 3;
+    width: 100%;
     margin-left: 0;
   }
 }

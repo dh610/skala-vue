@@ -65,8 +65,6 @@ watchEffect(() => {
 
 <template>
   <main class="challenge-page">
-    <h1>125페이지 Code Challenge</h1>
-
     <section class="practice-section">
       <h2>1. computed() 캐싱 동작</h2>
       <p>count: {{ count }} / dummy: {{ dummy }}</p>
@@ -80,7 +78,9 @@ watchEffect(() => {
 
     <section class="practice-section">
       <h2>2. watch() 기본 예제</h2>
-      <p>현재 선택된 도시: <strong>{{ currentCity }}</strong></p>
+      <p>
+        현재 선택된 도시: <strong>{{ currentCity }}</strong>
+      </p>
       <div class="controls">
         <button v-for="city in ['서울', '수원', '부산']" :key="city" @click="currentCity = city">
           {{ city }} 선택
@@ -153,23 +153,9 @@ watchEffect(() => {
 </template>
 
 <style scoped>
-.challenge-page {
-  display: grid;
-  gap: 16px;
-  width: min(100%, 820px);
-  margin: 0 auto;
-}
-
-.practice-section {
-  padding: 18px;
-  border: 1px solid #d7dce2;
-  border-radius: 8px;
-  background: #ffffff;
-}
-
 h1,
 h2 {
-  color: #1f2933;
+  color: var(--ink);
 }
 
 h1 {
@@ -194,10 +180,10 @@ button,
 select {
   min-height: 34px;
   padding: 6px 10px;
-  border: 1px solid #9ca3af;
-  border-radius: 4px;
-  background: #f7f8fa;
-  color: #1f2933;
+  border: 1px solid var(--muted);
+  border-radius: var(--r-sm);
+  background: var(--canvas);
+  color: var(--ink);
 }
 
 button {
@@ -205,7 +191,7 @@ button {
 }
 
 button:hover {
-  background: #e9eef3;
+  background: var(--line);
 }
 
 select {
@@ -218,8 +204,8 @@ fieldset {
   gap: 10px;
   margin: 0;
   padding: 7px 10px;
-  border: 1px solid #c8ced6;
-  border-radius: 4px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
 }
 
 legend {
@@ -232,25 +218,18 @@ legend {
   margin-top: 12px;
 }
 
-.monitor {
-  margin: 12px 0 0;
-  padding: 10px;
-  border-left: 4px solid #168a65;
-  background: #effaf6;
-}
-
 .monitor-stack .monitor {
   margin: 0;
 }
 
 .monitor-alt {
-  border-left-color: #3973ac;
-  background: #f0f6fc;
+  border-left-color: var(--accent);
+  background: var(--canvas);
 }
 
 small {
   display: block;
   margin-top: 8px;
-  color: #5d6772;
+  color: var(--ink-soft);
 }
 </style>

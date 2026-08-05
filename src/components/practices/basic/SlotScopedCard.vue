@@ -21,9 +21,9 @@ const userCount = ref(150)
 .slot-card {
   min-height: 116px;
   padding: 16px;
-  border: 1px solid #cfd6dd;
-  border-radius: 6px;
-  background: #ffffff;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--paper);
 }
 
 .child-heading {
@@ -35,28 +35,27 @@ const userCount = ref(150)
 }
 
 .child-heading span {
-  color: #52616f;
+  color: var(--ink-soft);
   font-size: 12px;
   font-weight: 700;
-  text-transform: uppercase;
 }
 
 button {
   min-height: 32px;
   padding: 5px 9px;
-  border: 1px solid #8d99a5;
-  border-radius: 4px;
-  background: #f7f8fa;
-  color: #202830;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--canvas);
+  color: var(--ink);
   cursor: pointer;
 }
 
 button:hover {
-  background: #e9f0f2;
+  background: var(--canvas-deep);
 }
 
 .fallback {
   margin: 0;
-  color: #5d6772;
+  color: var(--ink-soft);
 }
 </style>

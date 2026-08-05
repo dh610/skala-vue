@@ -42,17 +42,11 @@ function showDetail(cityName, status) {
 
 <template>
   <main class="challenge-page">
-    <h1>97페이지 코드 실습</h1>
-
     <section class="practice-section">
       <h2>Vue Form Handling</h2>
 
       <h3>1) v-model 양방향 바인딩</h3>
-      <input
-        v-model="searchCity"
-        type="text"
-        placeholder="날씨를 보고 싶은 도시명을 입력하세요"
-      />
+      <input v-model="searchCity" type="text" placeholder="날씨를 보고 싶은 도시명을 입력하세요" />
       <p>입력 값(실시간 반영): {{ searchCity }}</p>
 
       <h3>2) :value + @input 바인딩 (한글 입력 + 수동 반영)</h3>
@@ -110,24 +104,15 @@ function showDetail(cityName, status) {
         <p v-if="city.temp >= 25">🔥 더움 (25도 이상)</p>
         <p v-else>❄️ 선선함 (25도 미만)</p>
         <p>상태: {{ city.status }}</p>
-        <button class="detail-button" @click.stop="showDetail(city.name, city.status)">상세보기</button>
+        <button class="detail-button" @click.stop="showDetail(city.name, city.status)">
+          상세보기
+        </button>
       </div>
     </section>
   </main>
 </template>
 
 <style scoped>
-.challenge-page {
-  display: grid;
-  gap: 16px;
-}
-
-.practice-section {
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 16px;
-}
-
 .practice-section h3 {
   margin: 12px 0 6px;
 }
@@ -135,29 +120,22 @@ function showDetail(cityName, status) {
 .status-bar {
   padding: 8px 10px;
   margin-top: 8px;
-  border: 1px dashed #42b883;
-  border-radius: 8px;
-  background-color: #f3fff9;
+  border: 1px dashed var(--accent);
+  border-radius: var(--r-md);
+  background-color: var(--canvas);
 }
 
 .weather-card {
-  border: 1px solid #d6d6d6;
-  border-radius: 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
   padding: 12px;
   margin-bottom: 8px;
   cursor: pointer;
-  background-color: #f8fbff;
+  background-color: var(--canvas);
 }
 
 .detail-button {
   margin-top: 8px;
-}
-
-.empty-state {
-  padding: 12px;
-  border: 1px dashed #999;
-  border-radius: 8px;
-  color: #666;
 }
 
 input {
@@ -168,6 +146,4 @@ input {
 }
 </style>
 
-<style>
-@import '@/assets/challenge.css';
-</style>
+<style></style>

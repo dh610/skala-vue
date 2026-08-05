@@ -23,22 +23,24 @@ function updateQuery(event) {
       placeholder="검색할 도시 이름 입력"
       @input="updateQuery"
     />
-    <p>검색 중인 도시: <strong>{{ searchQuery || '전체 도시' }}</strong></p>
+    <p>
+      검색 중인 도시: <strong>{{ searchQuery || '전체 도시' }}</strong>
+    </p>
   </div>
 </template>
 
 <style scoped>
 .search-bar {
   padding: 14px;
-  border: 1px solid #dce2e7;
-  border-radius: 6px;
-  background: #f8fafb;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--canvas);
 }
 
 label {
   display: block;
   margin-bottom: 6px;
-  color: #52616f;
+  color: var(--ink-soft);
   font-size: 13px;
   font-weight: 700;
 }
@@ -47,16 +49,16 @@ input {
   width: 100%;
   min-height: 42px;
   padding: 8px 10px;
-  border: 1px solid #929da8;
-  border-radius: 4px;
-  background: #ffffff;
-  color: #202830;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--paper);
+  color: var(--ink);
   font-size: 16px;
 }
 
 p {
   margin: 8px 0 0;
-  color: #52616f;
+  color: var(--ink-soft);
   font-size: 14px;
 }
 </style>

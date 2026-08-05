@@ -7,11 +7,6 @@ const showDemo = ref(true)
 
 <template>
   <main class="challenge-page">
-    <header>
-      <p>Vue Component</p>
-      <h1>136페이지 Lifecycle Hook Challenge</h1>
-    </header>
-
     <section class="controller">
       <div>
         <span class="status-dot" :class="{ active: showDemo }" aria-hidden="true"></span>
@@ -32,20 +27,11 @@ const showDemo = ref(true)
 </template>
 
 <style scoped>
-.challenge-page {
-  display: grid;
-  gap: 16px;
-  width: min(100%, 780px);
-  margin: 0 auto;
-  color: #202830;
-}
-
 header p {
   margin: 0 0 4px;
-  color: #52616f;
+  color: var(--ink-soft);
   font-size: 13px;
   font-weight: 700;
-  text-transform: uppercase;
 }
 
 h1 {
@@ -60,9 +46,9 @@ h1 {
   justify-content: space-between;
   gap: 12px;
   padding: 14px 16px;
-  border: 1px solid #d7dce2;
-  border-radius: 8px;
-  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--paper);
 }
 
 .status-dot {
@@ -71,39 +57,39 @@ h1 {
   height: 10px;
   margin-right: 6px;
   border-radius: 50%;
-  background: #a6afb8;
+  background: var(--line-strong);
 }
 
 .status-dot.active {
-  background: #168a65;
+  background: var(--ok);
 }
 
 button {
   min-height: 38px;
   padding: 7px 12px;
-  border: 1px solid #8d99a5;
-  border-radius: 4px;
-  background: #f7f8fa;
-  color: #202830;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--canvas);
+  color: var(--ink);
   cursor: pointer;
 }
 
 button:hover {
-  background: #e9f0f2;
+  background: var(--canvas-deep);
 }
 
 .unmounted-panel {
   min-height: 220px;
   padding: 48px 20px;
-  border: 1px dashed #8d99a5;
-  border-radius: 8px;
-  color: #52616f;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-md);
+  color: var(--ink-soft);
   text-align: center;
 }
 
 .unmounted-panel h2 {
   margin: 0 0 8px;
-  color: #202830;
+  color: var(--ink);
   font-size: 20px;
 }
 

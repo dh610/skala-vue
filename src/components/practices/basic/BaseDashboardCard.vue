@@ -19,14 +19,14 @@ defineProps({
 <style scoped>
 .dashboard-card {
   padding: 18px;
-  border: 1px solid #d7dce2;
-  border-radius: 8px;
-  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--paper);
 }
 
 h2 {
   margin: 0 0 14px;
-  color: #202830;
+  color: var(--ink);
   font-size: 18px;
 }
 

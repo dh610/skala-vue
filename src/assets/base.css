@@ -1,73 +1,87 @@
-/* color palette from <https://github.com/vuejs/theme> */
+/* ===========================================================
+   Design tokens — SKALA Vue 실습
+   따뜻한 에디토리얼 톤 (오프화이트 종이 + 헤어라인 + 오커 스팟)
+   =========================================================== */
 :root {
   color-scheme: light;
 
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
+  /* surface — 따뜻한 오프화이트 (참조 사이트의 순백과 구분) */
+  --paper: #fbfaf7;
+  --canvas: #f3f1ec;
+  --canvas-deep: #ebe7df;
 
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
+  /* text — 따뜻한 먹색 */
+  --ink: #1c1a16;
+  --ink-soft: #565049;
+  --muted: #938d82;
+  --on-accent: #fbfaf7;
 
-  --vt-c-indigo: #2c3e50;
+  /* line — 구조는 헤어라인이 담당 (섀도우 없음) */
+  --line: #e4e0d8;
+  --line-strong: #1c1a16;
 
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+  /* accent — 오커(황토) 스팟 컬러가 우리 지문 */
+  --accent: #a76f1e;
+  --accent-bg: #f3ead9;
+  --accent-dark: #855618;
 
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
-}
+  /* 온도 의미색 */
+  --hot: #b0442a;
+  --hot-bg: #f6e7e0;
+  --mild: #565049;
+  --mild-bg: #ece9e2;
+  --cool: #2f5f8c;
+  --cool-bg: #e4edf4;
 
-/* semantic color variables for this project */
-:root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
+  --ok: #3f7a4e;
+  --ok-bg: #e6f0e8;
+  --warn: #a76f1e;
+  --warn-bg: #f3ead9;
+  --danger: #b0442a;
+  --danger-bg: #f6e7e0;
 
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
+  /* spacing */
+  --s1: 8px;
+  --s2: 16px;
+  --s3: 24px;
+  --s4: 32px;
+  --s5: 40px;
+  --s6: 48px;
+  --s8: 64px;
+  --s12: 96px;
 
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
+  /* radius — 에디토리얼: 거의 각지게 */
+  --r-sm: 2px;
+  --r-md: 3px;
+  --r-lg: 4px;
+  --pill: 999px;
 
-  --section-gap: 160px;
+  /* elevation — 카드는 섀도우 대신 헤어라인. 팝오버류만 살짝 */
+  --shadow-card: none;
+  --shadow-pop: 0 12px 34px -16px rgba(28, 26, 22, 0.3);
+
+  /* type */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', Pretendard, 'Segoe UI', Roboto,
+    'Malgun Gothic', system-ui, sans-serif;
+  --font-serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Times New Roman', serif;
+  --font-mono: 'SF Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
-  font-weight: normal;
 }
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
-  transition:
-    color 0.5s,
-    background-color 0.5s;
-  line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
+  margin: 0;
+  color: var(--ink);
+  background: var(--canvas);
+  font-family: var(--font-sans);
   font-size: 15px;
+  line-height: 1.6;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

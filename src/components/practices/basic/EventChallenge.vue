@@ -45,8 +45,6 @@ function handleEnter(e) {
 
 <template>
   <main class="challenge-page">
-    <h1>Vue Event Handling Code Challenge</h1>
-
     <section class="practice-section">
       <h2>v-on Event Handler Example</h2>
 
@@ -90,18 +88,6 @@ function handleEnter(e) {
 </template>
 
 <style scoped>
-.challenge-page {
-  display: grid;
-  gap: 20px;
-  padding: 20px;
-}
-
-.practice-section {
-  padding: 16px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-}
-
 .practice-section button,
 .practice-section input {
   margin: 4px;
@@ -109,12 +95,12 @@ function handleEnter(e) {
 
 .message-box {
   padding: 10px;
-  background-color: #f6f6f6;
-  border-left: 4px solid #42b883;
+  background-color: var(--canvas);
+  border-left: 4px solid var(--accent);
 }
 
 .parent-box {
   padding: 20px;
-  background-color: #eee;
+  background-color: var(--line);
 }
 </style>

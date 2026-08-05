@@ -6,11 +6,6 @@ import SlotScopedCard from './SlotScopedCard.vue'
 
 <template>
   <main class="challenge-page">
-    <header class="page-header">
-      <p>Vue Component Slot</p>
-      <h1>157페이지 Slot Challenge</h1>
-    </header>
-
     <section class="practice-section">
       <div class="section-heading">
         <span>01</span>
@@ -53,8 +48,12 @@ import SlotScopedCard from './SlotScopedCard.vue'
           <p class="example-label">자식 데이터를 부모 마크업으로 표현</p>
           <SlotScopedCard v-slot="slotData">
             <div class="status-display">
-              <p>알림 메시지: <strong>{{ slotData.text }}</strong></p>
-              <p>접속자 수: <strong>{{ slotData.count }}명</strong></p>
+              <p>
+                알림 메시지: <strong>{{ slotData.text }}</strong>
+              </p>
+              <p>
+                접속자 수: <strong>{{ slotData.count }}명</strong>
+              </p>
             </div>
           </SlotScopedCard>
         </div>
@@ -68,32 +67,16 @@ import SlotScopedCard from './SlotScopedCard.vue'
 </template>
 
 <style scoped>
-.challenge-page {
-  display: grid;
-  gap: 16px;
-  width: min(100%, 880px);
-  margin: 0 auto;
-  color: #202830;
-}
-
 .page-header p {
   margin: 0 0 4px;
-  color: #52616f;
+  color: var(--ink-soft);
   font-size: 13px;
   font-weight: 700;
-  text-transform: uppercase;
 }
 
 h1 {
   margin: 0;
   font-size: 28px;
-}
-
-.practice-section {
-  padding: 18px;
-  border: 1px solid #d7dce2;
-  border-radius: 8px;
-  background: #f8fafb;
 }
 
 .section-heading {
@@ -108,9 +91,9 @@ h1 {
   place-items: center;
   width: 28px;
   height: 28px;
-  border-radius: 4px;
-  background: #168a65;
-  color: #ffffff;
+  border-radius: var(--r-sm);
+  background: var(--ok);
+  color: var(--paper);
   font-size: 12px;
   font-weight: 700;
 }
@@ -139,7 +122,7 @@ h3 {
 
 .example-label {
   margin-bottom: 6px;
-  color: #52616f;
+  color: var(--ink-soft);
   font-size: 12px;
   font-weight: 700;
 }
@@ -151,8 +134,8 @@ h3 {
 
 .status-display {
   padding: 12px;
-  border-left: 4px solid #168a65;
-  background: #effaf6;
+  border-left: 4px solid var(--ok);
+  background: var(--accent-bg);
 }
 
 .status-display p {

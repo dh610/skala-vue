@@ -1,20 +1,23 @@
 @import './base.css';
+@import './ui.css';
 
 body {
   min-width: 320px;
-  background: #f7f9fb;
 }
 
 #app {
   width: 100%;
-  padding: 28px 20px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--s3) var(--s2) var(--s6);
 }
 
 a {
-  color: #2d6397;
+  color: var(--accent-dark);
   text-decoration: none;
 }
 
 a:hover {
   text-decoration: underline;
+  text-underline-offset: 3px;
 }

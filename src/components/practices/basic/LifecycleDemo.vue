@@ -65,21 +65,21 @@ onUnmounted(() => {
 .counter-panel,
 .log-panel {
   padding: 18px;
-  border: 1px solid #d7dce2;
-  border-radius: 8px;
-  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--paper);
 }
 
 .counter-panel {
   display: grid;
   place-items: center;
   min-height: 190px;
-  background: #f3faf8;
+  background: var(--canvas);
 }
 
 .label {
   margin: 0;
-  color: #52616f;
+  color: var(--ink-soft);
   font-weight: 700;
 }
 
@@ -91,15 +91,15 @@ onUnmounted(() => {
 button {
   min-height: 36px;
   padding: 7px 12px;
-  border: 1px solid #8d99a5;
-  border-radius: 4px;
-  background: #ffffff;
-  color: #202830;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--paper);
+  color: var(--ink);
   cursor: pointer;
 }
 
 button:hover {
-  background: #e9f0f2;
+  background: var(--canvas-deep);
 }
 
 h2 {
@@ -116,7 +116,7 @@ ol {
 
 .log-panel p {
   margin: 12px 0 0;
-  color: #5d6772;
+  color: var(--ink-soft);
   font-size: 13px;
 }
 </style>

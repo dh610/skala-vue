@@ -8,6 +8,15 @@ const router = createRouter({
       path: '/',
       name: 'weather-home',
       component: WeatherHomeView,
+      // 상세는 홈 위에 라우트로 구동되는 모달로 뜬다.
+      // router.push + :cityId 동적 매칭(과제 4)은 그대로 유지하면서 홈은 뒤에 계속 마운트된다.
+      children: [
+        {
+          path: 'weather/:cityId',
+          name: 'weather-detail',
+          component: () => import('../views/WeatherDetailView.vue'),
+        },
+      ],
     },
     {
       path: '/about',
@@ -15,30 +24,15 @@ const router = createRouter({
       component: () => import('../views/WeatherAboutView.vue'),
     },
     {
-      path: '/weather/:cityId',
-      name: 'weather-detail',
-      component: () => import('../views/WeatherDetailView.vue'),
+      path: '/challenges/:challengeId?',
+      name: 'code-challenges',
+      component: () => import('../views/CodeChallengesView.vue'),
     },
-    {
-      path: '/counter',
-      name: 'store-counter',
-      component: () => import('../components/practices/library/StoreCounter.vue'),
-    },
-    {
-      path: '/axios',
-      name: 'axios-challenge',
-      component: () => import('../views/AxiosChallengeView.vue'),
-    },
-    {
-      path: '/element-plus',
-      name: 'element-plus-challenge',
-      component: () => import('../views/ElementPlusChallengeView.vue'),
-    },
-    {
-      path: '/modern-js',
-      name: 'modern-javascript-challenge',
-      component: () => import('../views/ModernJavaScriptChallengeView.vue'),
-    },
+    // 아래 실습들은 Code Challenges 안으로 통합됨. 기존 주소는 리다이렉트로 유지한다.
+    { path: '/counter', redirect: '/challenges/pinia-counter' },
+    { path: '/axios', redirect: '/challenges/axios' },
+    { path: '/element-plus', redirect: '/challenges/element-plus' },
+    { path: '/modern-js', redirect: '/challenges/modern-js' },
     {
       path: '/:pathMatch(.*)*',
       name: 'not-found',

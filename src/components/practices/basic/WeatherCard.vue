@@ -24,7 +24,9 @@ function clickDetail() {
 <template>
   <article class="weather-card" :class="{ selected }" @click="selectCard">
     <div>
-      <h3>{{ weather.name }} <span>({{ weather.condition }})</span></h3>
+      <h3>
+        {{ weather.name }} <span>({{ weather.condition }})</span>
+      </h3>
       <p>현재 기온: {{ weather.temperature }}°C</p>
       <span class="temperature-label" :class="weather.temperature >= 25 ? 'hot' : 'mild'">
         {{ weather.temperature >= 25 ? '더움' : '선선함' }}
@@ -42,15 +44,15 @@ function clickDetail() {
   gap: 14px;
   min-height: 122px;
   padding: 15px;
-  border: 1px solid #cfd6dd;
-  border-radius: 6px;
-  background: #ffffff;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--paper);
   cursor: pointer;
 }
 
 .weather-card.selected {
-  border-color: #3973ac;
-  box-shadow: inset 0 0 0 1px #3973ac;
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
 }
 
 h3,
@@ -63,47 +65,47 @@ h3 {
 }
 
 h3 span {
-  color: #52616f;
+  color: var(--ink-soft);
   font-weight: 500;
 }
 
 p {
   margin-top: 6px;
-  color: #52616f;
+  color: var(--ink-soft);
 }
 
 .temperature-label {
   display: inline-block;
   margin-top: 9px;
   padding: 3px 7px;
-  border-radius: 4px;
+  border-radius: var(--r-sm);
   font-size: 12px;
   font-weight: 700;
 }
 
 .temperature-label.hot {
-  background: #fff0ec;
-  color: #a13c28;
+  background: var(--hot-bg);
+  color: var(--danger);
 }
 
 .temperature-label.mild {
-  background: #eaf4ff;
-  color: #2d6397;
+  background: var(--canvas-deep);
+  color: var(--accent-dark);
 }
 
 button {
   width: 76px;
   min-height: 36px;
   padding: 6px 9px;
-  border: 1px solid #8d99a5;
-  border-radius: 4px;
-  background: #f7f8fa;
-  color: #202830;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--canvas);
+  color: var(--ink);
   cursor: pointer;
 }
 
 button:hover {
-  background: #e9f0f2;
+  background: var(--canvas-deep);
 }
 
 @media (max-width: 480px) {

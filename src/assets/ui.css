@@ -1,0 +1,265 @@
+/* ===========================================================
+   Global UI primitives — 따뜻한 에디토리얼
+   컴포넌트마다 중복 정의하던 클래스를 여기서 한 번만 소유한다.
+   =========================================================== */
+
+/* ---------- 페이지 골격 ---------- */
+.challenge-page,
+.weather-page {
+  display: grid;
+  gap: var(--s4);
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* 섹션 제목: 오커 짧은 룰 + 제목 + 하단 헤어라인 (참조의 대문자 eyebrow 대신) */
+.page-heading {
+  display: grid;
+  gap: 6px;
+  padding-bottom: var(--s2);
+  border-bottom: 1px solid var(--line);
+}
+
+.page-heading::before {
+  content: '';
+  width: 34px;
+  height: 3px;
+  margin-bottom: 6px;
+  background: var(--accent);
+}
+
+.page-heading h1,
+.page-heading h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.page-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* 대문자 letterspaced 라벨 (에디토리얼 장르 공통 요소) */
+.eyebrow {
+  color: var(--muted);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* ---------- 카드 면 (섀도우 없이 헤어라인) ---------- */
+.practice-section,
+.surface-card {
+  padding: var(--s3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--paper);
+}
+
+.practice-section > h1,
+.practice-section > h2 {
+  margin: 0 0 var(--s2);
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.practice-section > h3 {
+  margin: var(--s3) 0 var(--s1);
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.practice-section > h3:first-of-type {
+  margin-top: 0;
+}
+
+.practice-section p {
+  color: var(--ink-soft);
+}
+
+/* ---------- 결과 출력 (값이 코드/데이터인 곳만 mono) ---------- */
+.monitor,
+.console {
+  padding: var(--s2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--canvas-deep);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.console {
+  min-height: 52px;
+  border-color: transparent;
+  background: #201d17;
+  color: #e6b877;
+}
+
+/* ---------- 컨트롤 묶음 ---------- */
+.controls,
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s1);
+  margin: var(--s2) 0 0;
+}
+
+/* ---------- 상태/빈 결과 ---------- */
+.empty-state {
+  margin: 0;
+  padding: var(--s4) var(--s2);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-sm);
+  color: var(--muted);
+  text-align: center;
+}
+
+.status-strip {
+  margin: 0;
+  padding: 12px var(--s2);
+  border-left: 3px solid var(--accent);
+  background: var(--accent-bg);
+  color: var(--accent-dark);
+  font-weight: 600;
+}
+
+.error-message {
+  margin: var(--s2) 0 0;
+  color: var(--danger);
+  font-weight: 700;
+}
+
+/* ---------- 인라인 코드 칩 ---------- */
+code {
+  padding: 1px 6px;
+  border-radius: var(--r-sm);
+  background: var(--canvas-deep);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+}
+
+/* ---------- 순정 폼 요소 (Element Plus 안 쓰는 챌린지용) ---------- */
+button:not([class*='el-']) {
+  min-height: 36px;
+  padding: 7px 15px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+button:not([class*='el-']):hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--on-accent);
+}
+
+button:not([class*='el-']):disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+input:not([class*='el-']):not([type='radio']):not([type='checkbox']),
+select:not([class*='el-']),
+textarea:not([class*='el-']) {
+  min-height: 36px;
+  padding: 7px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 14px;
+}
+
+input:not([class*='el-']):focus-visible,
+select:not([class*='el-']):focus-visible,
+textarea:not([class*='el-']):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+fieldset {
+  padding: var(--s1) var(--s2) 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+}
+
+legend {
+  padding: 0 6px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ===========================================================
+   Element Plus 테마 정렬
+   =========================================================== */
+:root {
+  --el-color-primary: var(--accent);
+  --el-color-primary-light-3: #bd8a44;
+  --el-color-primary-light-5: #cca566;
+  --el-color-primary-light-7: #dcc194;
+  --el-color-primary-light-8: #e6d1ac;
+  --el-color-primary-light-9: var(--accent-bg);
+  --el-color-primary-dark-2: var(--accent-dark);
+  --el-color-success: var(--ok);
+  --el-color-warning: var(--warn);
+  --el-color-danger: var(--danger);
+  --el-color-error: var(--danger);
+  --el-border-radius-base: var(--r-sm);
+  --el-border-radius-small: var(--r-sm);
+  --el-font-family: var(--font-sans);
+  --el-border-color: var(--line);
+  --el-border-color-light: var(--line);
+  --el-border-color-lighter: var(--line);
+  --el-fill-color-blank: var(--paper);
+  --el-bg-color: var(--paper);
+  --el-bg-color-overlay: var(--paper);
+  --el-text-color-primary: var(--ink);
+  --el-text-color-regular: var(--ink-soft);
+  --el-text-color-secondary: var(--muted);
+  --el-text-color-placeholder: var(--muted);
+}
+
+.el-card {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: none !important;
+}
+
+.el-card__header {
+  border-bottom: 1px solid var(--line);
+}
+
+.el-button {
+  font-weight: 600;
+}
+
+.el-alert {
+  border-radius: var(--r-sm);
+}
+
+/* 온도 칩 등은 각진 라벨로 (참조의 mono 숫자 시그니처와 구분) */
+.el-tag {
+  border-radius: var(--r-sm);
+  font-weight: 700;
+}

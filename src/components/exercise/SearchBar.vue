@@ -13,8 +13,8 @@ defineEmits(['update:modelValue'])
   <ElInput
     id="city-search"
     clearable
-    :value="modelValue"
+    :model-value="modelValue"
     placeholder="검색할 도시 이름 입력"
-    @input="$emit('update:modelValue', $event)"
+    @update:model-value="$emit('update:modelValue', $event)"
   />
 </template>

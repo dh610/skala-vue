@@ -53,11 +53,6 @@ function showDetails(weather) {
 
 <template>
   <main class="weather-page">
-    <header>
-      <p>Vue Component Assignment</p>
-      <h1>과제 3: 날씨 (컴포넌트)</h1>
-    </header>
-
     <BaseDashboardCard title="도시 검색">
       <SearchBar :search-query="searchQuery" @update-query="updateSearchQuery" />
     </BaseDashboardCard>
@@ -90,20 +85,11 @@ function showDetails(weather) {
 </template>
 
 <style scoped>
-.weather-page {
-  display: grid;
-  gap: 16px;
-  width: min(100%, 820px);
-  margin: 0 auto;
-  color: #202830;
-}
-
 header p {
   margin: 0 0 4px;
-  color: #52616f;
+  color: var(--ink-soft);
   font-size: 13px;
   font-weight: 700;
-  text-transform: uppercase;
 }
 
 h1 {
@@ -116,22 +102,13 @@ h1 {
   gap: 10px;
 }
 
-.empty-state {
-  margin: 0;
-  padding: 24px 12px;
-  border: 1px dashed #929da8;
-  border-radius: 6px;
-  color: #52616f;
-  text-align: center;
-}
-
 .selection-status {
   margin: 0;
   padding: 12px 14px;
-  border: 1px solid #a8d8c7;
-  border-radius: 6px;
-  background: #effaf6;
-  color: #19664e;
+  border: 1px solid var(--accent);
+  border-radius: var(--r-sm);
+  background: var(--accent-bg);
+  color: var(--accent-dark);
   text-align: center;
 }
 </style>

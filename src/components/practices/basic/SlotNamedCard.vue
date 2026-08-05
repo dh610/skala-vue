@@ -16,15 +16,15 @@
 <style scoped>
 .slot-card {
   overflow: hidden;
-  border: 1px solid #cfd6dd;
-  border-radius: 6px;
-  background: #ffffff;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--paper);
 }
 
 header {
   padding: 14px 16px;
-  border-bottom: 1px solid #dce2e7;
-  background: #eef5f8;
+  border-bottom: 1px solid var(--line);
+  background: var(--canvas-deep);
 }
 
 .body {

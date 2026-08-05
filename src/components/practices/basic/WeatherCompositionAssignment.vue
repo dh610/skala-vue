@@ -46,11 +46,6 @@ function showDetails(weather) {
 
 <template>
   <main class="weather-page">
-    <header class="page-header">
-      <p class="eyebrow">Composition API Assignment</p>
-      <h1>과제 2: 날씨</h1>
-    </header>
-
     <section class="search-section" aria-labelledby="search-heading">
       <h2 id="search-heading">도시 검색</h2>
       <label for="city-search">도시명</label>
@@ -104,24 +99,15 @@ function showDetails(weather) {
 </template>
 
 <style scoped>
-.weather-page {
-  display: grid;
-  gap: 16px;
-  width: min(100%, 860px);
-  margin: 0 auto;
-  color: #202830;
-}
-
 .page-header {
   padding: 4px 0;
 }
 
 .eyebrow {
   margin: 0 0 4px;
-  color: #52616f;
+  color: var(--ink-soft);
   font-size: 13px;
   font-weight: 700;
-  text-transform: uppercase;
 }
 
 h1,
@@ -143,9 +129,9 @@ h2 {
 .search-section,
 .weather-section {
   padding: 18px;
-  border: 1px solid #d7dce2;
-  border-radius: 8px;
-  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--paper);
 }
 
 .search-section label {
@@ -159,16 +145,16 @@ input {
   width: 100%;
   min-height: 42px;
   padding: 8px 10px;
-  border: 1px solid #929da8;
-  border-radius: 4px;
-  background: #ffffff;
-  color: #202830;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--paper);
+  color: var(--ink);
   font-size: 16px;
 }
 
 .search-summary {
   margin: 8px 0 0;
-  color: #52616f;
+  color: var(--ink-soft);
   font-size: 14px;
 }
 
@@ -181,7 +167,7 @@ input {
 }
 
 .section-heading span {
-  color: #52616f;
+  color: var(--ink-soft);
   font-size: 13px;
 }
 
@@ -198,15 +184,15 @@ input {
   align-items: center;
   min-height: 136px;
   padding: 14px;
-  border: 1px solid #cfd6dd;
-  border-radius: 6px;
-  background: #f8fafb;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--canvas);
   cursor: pointer;
 }
 
 .weather-card.selected {
-  border-color: #168a65;
-  box-shadow: inset 0 0 0 1px #168a65;
+  border-color: var(--ok);
+  box-shadow: inset 0 0 0 1px var(--ok);
 }
 
 .city-name,
@@ -222,7 +208,7 @@ input {
 
 .condition {
   margin-top: 3px;
-  color: #52616f;
+  color: var(--ink-soft);
 }
 
 .temperature {
@@ -239,33 +225,24 @@ button {
   grid-column: 1 / -1;
   min-height: 34px;
   padding: 6px 10px;
-  border: 1px solid #929da8;
-  border-radius: 4px;
-  background: #ffffff;
-  color: #202830;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--paper);
+  color: var(--ink);
   cursor: pointer;
 }
 
 button:hover {
-  background: #eaf0f3;
-}
-
-.empty-state {
-  margin: 0;
-  padding: 24px 12px;
-  border: 1px dashed #929da8;
-  border-radius: 6px;
-  color: #52616f;
-  text-align: center;
+  background: var(--canvas-deep);
 }
 
 .selection-status {
   margin: 0;
   padding: 12px 14px;
-  border: 1px solid #a8d8c7;
-  border-radius: 6px;
-  background: #effaf6;
-  color: #19664e;
+  border: 1px solid var(--accent);
+  border-radius: var(--r-sm);
+  background: var(--accent-bg);
+  color: var(--accent-dark);
   text-align: center;
 }
 
