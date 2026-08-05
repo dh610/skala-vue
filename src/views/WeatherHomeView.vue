@@ -3,6 +3,7 @@ import { computed, onMounted, ref, watch, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
 import { useConfigStore } from '../stores/configStore.js'
 import { useWeatherStore } from '../stores/weatherStore.js'
+import { useWeatherSearch } from '../composables/useWeatherSearch.js'
 import { countries, defaultCountryCode } from '../data/countries.js'
 import BaseDashboardCard from '../components/exercise/BaseDashboardCard.vue'
 import SearchBar from '../components/exercise/SearchBar.vue'
@@ -13,8 +14,13 @@ const configStore = useConfigStore()
 const weatherStore = useWeatherStore()
 
 const activeCode = ref(defaultCountryCode)
-const searchQuery = ref('')
 const selectedCityInfo = ref(null)
+
+// 전역 도시 검색 로직은 Composable로 추출해 재사용 가능하게 분리했다.
+const { searchQuery, isSearching, searchResults } = useWeatherSearch(
+  computed(() => weatherStore.allRecords),
+  (codes) => codes.forEach((code) => weatherStore.loadCountry(code)),
+)
 
 onMounted(() => {
   weatherStore.loadCountry(activeCode.value)
@@ -31,21 +37,6 @@ const activeCountry = computed(() => countries.find((c) => c.code === activeCode
 const cityRecords = computed(() => weatherStore.records(activeCode.value))
 const isLive = computed(() => weatherStore.isLive(activeCode.value))
 const isLoading = computed(() => weatherStore.loadingCode === activeCode.value)
-
-// 검색은 국가에 묶이지 않는 전역 동작. 검색어가 있으면 모든 국가에서 찾는다.
-const isSearching = computed(() => searchQuery.value.trim() !== '')
-
-const searchResults = computed(() => {
-  const keyword = searchQuery.value.trim()
-  if (!keyword) return []
-  return weatherStore.allRecords.filter((city) => city.name.includes(keyword))
-})
-
-// 검색어가 여러 국가에 걸치면(예: '오' → 오사카·오스틴) 매치된 국가를 모두 불러온다.
-watch(searchResults, (results) => {
-  const codes = new Set(results.map((city) => city.countryCode))
-  codes.forEach((code) => weatherStore.loadCountry(code))
-})
 
 // 화면에 뿌릴 목록: 검색 중이면 전역 결과, 아니면 선택 국가의 도시
 const displayList = computed(() => (isSearching.value ? searchResults.value : cityRecords.value))
@@ -92,11 +83,16 @@ const statusMessage = computed(() => {
   return `${city.name}${subjectParticle(city.name)} 선택되었습니다.`
 })
 
-watch(selectedCityInfo, (newCity, oldCity) => {
-  const previousName = oldCity?.name ?? '선택 없음'
-  const currentName = newCity?.name ?? '선택 없음'
-  console.log(`[watch 감지] 선택 도시 변경: ${previousName} -> ${currentName}`)
-})
+// immediate: true → 최초 마운트 시점에도 콜백이 한 번 실행돼 로그가 찍힌다.
+watch(
+  selectedCityInfo,
+  (newCity, oldCity) => {
+    const previousName = oldCity?.name ?? '선택 없음'
+    const currentName = newCity?.name ?? '선택 없음'
+    console.log(`[watch 감지] 선택 도시 변경: ${previousName} -> ${currentName}`)
+  },
+  { immediate: true },
+)
 
 watchEffect(() => {
   console.log(`[watchEffect 자동 호출] 현재 검색어: "${searchQuery.value}"`)
@@ -205,8 +201,21 @@ function refresh() {
           :region="isSearching ? weather.countryKo : ''"
           @select-card="selectCity"
           @click-detail="showDetails"
-        />
+        >
+          <!-- action Scoped Slot: 부모가 상세보기 버튼 영역을 직접 구성 -->
+          <template #action="{ weather: city, open }">
+            <button type="button" class="card-detail" @click.stop="open">
+              {{ city.name }} 상세 보기 →
+            </button>
+          </template>
+        </WeatherCard>
       </div>
+
+      <!-- BaseDashboardCard footer Named Slot 활용 -->
+      <template #footer>
+        {{ isLive ? 'OpenWeather 실시간 관측값' : '목데이터' }} · 카드를 클릭해 히어로에 올리거나
+        상세를 열 수 있습니다.
+      </template>
     </BaseDashboardCard>
 
     <p class="status-strip">{{ statusMessage }}</p>
@@ -363,6 +372,10 @@ function refresh() {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: var(--s2);
+}
+
+.card-detail {
+  width: 100%;
 }
 
 .search-status {

@@ -27,7 +27,13 @@ const displayTemperature = computed(() => {
   return configStore.unit === 'fahrenheit' ? Math.round((celsius * 9) / 5 + 32) : celsius
 })
 
-const isHot = computed(() => props.weather.temperature >= 25)
+// 25 / 20도 기준 3단계 라벨 (더움 / 보통 / 선선함)
+const tempLevel = computed(() => {
+  const t = props.weather.temperature
+  if (t >= 25) return { key: 'hot', label: '더움' }
+  if (t >= 20) return { key: 'mild', label: '보통' }
+  return { key: 'cool', label: '선선함' }
+})
 </script>
 
 <template>
@@ -41,9 +47,7 @@ const isHot = computed(() => props.weather.temperature >= 25)
         <span v-if="region" class="region">{{ region }}</span>
         <h3>{{ weather.name }}</h3>
       </div>
-      <span class="temp-tag" :class="isHot ? 'is-hot' : 'is-cool'">
-        {{ isHot ? '더움' : '선선함' }}
-      </span>
+      <span class="temp-tag" :class="`is-${tempLevel.key}`">{{ tempLevel.label }}</span>
     </div>
 
     <p class="condition">{{ weather.condition }}</p>
@@ -53,11 +57,14 @@ const isHot = computed(() => props.weather.temperature >= 25)
       {{ displayTemperature }}<em>{{ configStore.unitSymbol }}</em>
     </p>
 
-    <!-- 하단 버튼은 구분선으로 카드 본문(선택)과 클릭 영역을 명확히 나눈다 -->
+    <!-- 하단 버튼은 구분선으로 카드 본문(선택)과 클릭 영역을 명확히 나눈다.
+         action Named/Scoped Slot으로 부모가 버튼 영역을 커스터마이징할 수 있다. -->
     <div class="card-foot">
-      <button type="button" class="detail-button" @click.stop="$emit('click-detail', weather)">
-        상세 날씨 보기
-      </button>
+      <slot name="action" :weather="weather" :open="() => $emit('click-detail', weather)">
+        <button type="button" class="detail-button" @click.stop="$emit('click-detail', weather)">
+          상세 날씨 보기
+        </button>
+      </slot>
     </div>
   </article>
 </template>
@@ -143,6 +150,11 @@ h3 {
 .temp-tag.is-hot {
   color: var(--hot);
   background: var(--hot-bg);
+}
+
+.temp-tag.is-mild {
+  color: var(--mild);
+  background: var(--mild-bg);
 }
 
 .temp-tag.is-cool {

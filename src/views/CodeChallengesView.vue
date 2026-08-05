@@ -81,10 +81,7 @@ watchEffect(() => {
         <ElCollapse v-model="openPanels" class="requirement-collapse">
           <ElCollapseItem name="requirements">
             <template #title>
-              <span class="collapse-title">
-                과제 요구사항
-                <em>{{ activeChallenge.requirements.length }}항목</em>
-              </span>
+              <span class="collapse-title">과제 요구사항</span>
             </template>
 
             <ul class="requirement-list">
@@ -306,22 +303,9 @@ watchEffect(() => {
 }
 
 .collapse-title {
-  display: flex;
-  align-items: center;
-  gap: var(--s1);
   color: var(--ink);
   font-size: 14px;
   font-weight: 800;
-}
-
-.collapse-title em {
-  padding: 2px 8px;
-  border-radius: var(--pill);
-  background: var(--paper);
-  color: var(--muted);
-  font-size: 11px;
-  font-style: normal;
-  font-weight: 700;
 }
 
 .requirement-list {
