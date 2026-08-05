@@ -55,7 +55,7 @@ const runTask3 = async () => {
     const { uid } = await fetchUserId()
     const { nick } = await fetchUserProfile(uid)
     result3.value = `동기화 성공 : ${nick} 님 환영합니다.`
-  } catch (error) {
+  } catch {
     result3.value = '통신 실패'
   } finally {
     isSyncing.value = false
