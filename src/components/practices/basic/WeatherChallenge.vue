@@ -27,6 +27,23 @@ const ageInput = ref(0)
 const emailInput = ref('')
 const priceInput = ref('')
 
+// TODO 1) :value/@input(즉시) vs v-model.trim.lazy(지연+트림) 동작 비교
+const instantInput = ref('')
+const deferredInput = ref('')
+
+// TODO 2) v-memo 리렌더 확인용: 관계없는 상태
+const unrelatedTick = ref(0)
+
+function updateInstant(event) {
+  instantInput.value = event.target.value
+}
+
+function renderLog(cityName) {
+  // v-memo가 걸린 카드가 실제로 다시 렌더될 때만 콘솔에 찍힌다.
+  console.log(`[render] ${cityName} 카드 렌더링`)
+  return ''
+}
+
 function updateSearch(event) {
   searchCity.value = event.target.value
 }
@@ -88,21 +105,52 @@ function showDetail(cityName, status) {
         <input v-model.trim.number="priceInput" placeholder="공백+숫자 조합" />
         <p>처리값: "{{ priceInput }}"</p>
       </div>
+
+      <div class="compare-box">
+        <h3>5) 동작 비교 — 즉시(:value/@input) vs 지연·트림(v-model.trim.lazy)</h3>
+        <label>
+          A. 즉시 반영
+          <input :value="instantInput" placeholder="입력 즉시 반영" @input="updateInstant" />
+        </label>
+        <p>A 값: "{{ instantInput }}"</p>
+        <label>
+          B. 지연 + 트림 (입력 후 Enter 또는 포커스 해제 시 앞뒤 공백 제거하고 반영)
+          <input v-model.trim.lazy="deferredInput" placeholder="  Enter/Blur 시 반영  " />
+        </label>
+        <p>B 값: "{{ deferredInput }}"</p>
+      </div>
     </section>
 
     <section class="practice-section">
-      <h2>날씨 Mockup (v-for, v-if, 이벤트)</h2>
+      <h2>날씨 Mockup (v-for, v-if, v-memo, 이벤트)</h2>
+
+      <!-- TODO 2) v-memo 리렌더 확인: 관계없는 상태를 바꿔도 카드가 다시 렌더되지 않는다 -->
+      <div class="controls">
+        <button type="button" @click="unrelatedTick++">
+          관계없는 상태 변경 ({{ unrelatedTick }})
+        </button>
+        <button type="button" @click="weatherList[0].temp++">서울 기온 +1</button>
+        <small
+          >콘솔에서 카드 렌더 로그를 확인하세요. v-memo 덕분에 관계없는 상태 변경은 카드를 다시
+          렌더하지 않습니다.</small
+        >
+      </div>
+
       <div v-if="filteredWeather.length === 0" class="empty-state">해당 도시가 없습니다.</div>
       <div
         v-for="city in filteredWeather"
         :key="city.id"
+        v-memo="[city.temp, city.name]"
         class="weather-card"
         @click="selectCity(city.name)"
       >
+        <span hidden>{{ renderLog(city.name) }}</span>
         <h3>{{ city.name }}</h3>
         <p>기온: {{ city.temp }}°C</p>
+        <!-- TODO 3) 25/20도 기준 3단계 라벨 (v-if / v-else-if / v-else) -->
         <p v-if="city.temp >= 25">🔥 더움 (25도 이상)</p>
-        <p v-else>❄️ 선선함 (25도 미만)</p>
+        <p v-else-if="city.temp >= 20">🌤 보통 (20~24도)</p>
+        <p v-else>❄️ 선선함 (20도 미만)</p>
         <p>상태: {{ city.status }}</p>
         <button class="detail-button" @click.stop="showDetail(city.name, city.status)">
           상세보기
@@ -136,6 +184,22 @@ function showDetail(cityName, status) {
 
 .detail-button {
   margin-top: 8px;
+}
+
+.compare-box {
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--canvas);
+}
+
+.compare-box label {
+  display: block;
+  margin-top: 8px;
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 700;
 }
 
 input {
