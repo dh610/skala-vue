@@ -14,6 +14,16 @@ export const challengeChapters = [
     tone: 'green',
     challenges: [
       {
+        id: 'intro',
+        title: '학습환경 구성',
+        subtitle: '반응성 · 텍스트 보간',
+        requirements: [
+          '반응성 데이터 (Reactivity) Example',
+          'JavaScript in Text Interpolation Example',
+        ],
+        loader: () => import('../components/practices/basic/IntroChallenge.vue'),
+      },
+      {
         id: 'reactive-state',
         title: '반응형 상태',
         subtitle: 'ref, reactive',

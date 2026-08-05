@@ -32,21 +32,34 @@ const cityRecords = computed(() => weatherStore.records(activeCode.value))
 const isLive = computed(() => weatherStore.isLive(activeCode.value))
 const isLoading = computed(() => weatherStore.loadingCode === activeCode.value)
 
-const filteredWeatherList = computed(() => {
+// 검색은 국가에 묶이지 않는 전역 동작. 검색어가 있으면 모든 국가에서 찾는다.
+const isSearching = computed(() => searchQuery.value.trim() !== '')
+
+const searchResults = computed(() => {
   const keyword = searchQuery.value.trim()
-  if (!keyword) return cityRecords.value
-  return cityRecords.value.filter((weather) => weather.name.includes(keyword))
+  if (!keyword) return []
+  return weatherStore.allRecords.filter((city) => city.name.includes(keyword))
 })
 
-// 히어로에 세우는 도시: 카드를 선택하면 그 도시, 없으면 대표 도시(각 국가 cities[0]).
-// 선택 도시는 최신 레코드로 다시 조회해 실시간/단위 변경에 계속 반응하도록 한다.
+// 검색어가 여러 국가에 걸치면(예: '오' → 오사카·오스틴) 매치된 국가를 모두 불러온다.
+watch(searchResults, (results) => {
+  const codes = new Set(results.map((city) => city.countryCode))
+  codes.forEach((code) => weatherStore.loadCountry(code))
+})
+
+// 화면에 뿌릴 목록: 검색 중이면 전역 결과, 아니면 선택 국가의 도시
+const displayList = computed(() => (isSearching.value ? searchResults.value : cityRecords.value))
+
+// 히어로에 세우는 도시: 선택 도시 > (검색 중이면 첫 매치) > 선택 국가 대표 도시.
+// 전역 레코드에서 다시 조회해 실시간/단위 변경에 계속 반응하도록 한다.
 const featureCity = computed(() => {
   if (selectedCityInfo.value) {
     return (
-      cityRecords.value.find((city) => city.id === selectedCityInfo.value.id) ??
+      weatherStore.allRecords.find((city) => city.id === selectedCityInfo.value.id) ??
       selectedCityInfo.value
     )
   }
+  if (isSearching.value) return searchResults.value[0]
   return cityRecords.value[0]
 })
 const featureTemp = computed(() => {
@@ -111,10 +124,10 @@ function refresh() {
           <span class="live-dot" :class="{ 'is-live': isLive }" aria-hidden="true"></span>
           {{ isLive ? 'OpenWeather 실시간 관측' : '목데이터' }}
         </p>
-        <h1>{{ activeCountry.nameKo }} 날씨</h1>
+        <h1>세계 날씨</h1>
         <p class="hero__desc">
-          국가를 선택하면 대표 도시들의 실시간 기상관측값을 확인하고, 카드를 눌러 상세 정보를
-          봅니다.
+          도시를 검색하거나 국가를 선택해 대표 도시들의 실시간 기상관측값을 확인하고, 카드를 눌러
+          상세 정보를 봅니다.
         </p>
         <button type="button" class="refresh" :disabled="isLoading" @click="refresh">
           {{ isLoading ? '불러오는 중…' : '새로고침' }}
@@ -123,7 +136,7 @@ function refresh() {
 
       <div v-if="featureCity" class="hero__feature">
         <span class="hero__city">
-          {{ activeCountry.nameEn }} · {{ featureCity.name }}
+          {{ featureCity.countryEn }} · {{ featureCity.name }}
           <em v-if="localTime">현지 {{ localTime }}</em>
         </span>
         <span class="hero__temp"
@@ -133,8 +146,20 @@ function refresh() {
       </div>
     </section>
 
-    <!-- 국가 탭 스위처 -->
-    <nav class="country-tabs" aria-label="국가 선택">
+    <!-- 도시 검색: 국가보다 상위 레이어. 전체 국가에서 검색한다. -->
+    <BaseDashboardCard title="도시 검색">
+      <SearchBar v-model="searchQuery" />
+      <p class="search-status">
+        <template v-if="isSearching">
+          전체 국가에서 <strong>{{ searchQuery.trim() }}</strong> 검색 중 ·
+          {{ searchResults.length }}곳
+        </template>
+        <template v-else>도시 이름을 입력하면 국가와 상관없이 검색됩니다.</template>
+      </p>
+    </BaseDashboardCard>
+
+    <!-- 국가 탭 스위처 (검색 중에는 전역 결과로 대체) -->
+    <nav v-if="!isSearching" class="country-tabs" aria-label="국가 선택">
       <button
         v-for="country in countries"
         :key="country.code"
@@ -157,31 +182,27 @@ function refresh() {
       show-icon
     />
 
-    <BaseDashboardCard title="도시 검색">
-      <SearchBar v-model="searchQuery" />
-      <p class="search-status">
-        검색 중인 도시: <strong>{{ searchQuery.trim() || '전체' }}</strong>
-      </p>
-    </BaseDashboardCard>
-
-    <BaseDashboardCard :title="`${activeCountry.nameKo} 날씨 현황`">
+    <BaseDashboardCard :title="isSearching ? '검색 결과' : `${activeCountry.nameKo} 날씨 현황`">
       <template #meta>
-        <span class="count-badge">{{ filteredWeatherList.length }}곳</span>
+        <span class="count-badge">{{ displayList.length }}곳</span>
       </template>
 
-      <ElSkeleton v-if="isLoading && !isLive" :rows="4" animated />
+      <ElSkeleton v-if="!isSearching && isLoading && !isLive" :rows="4" animated />
 
       <ElEmpty
-        v-else-if="filteredWeatherList.length === 0"
-        description="검색 결과와 일치하는 도시가 없습니다."
+        v-else-if="displayList.length === 0"
+        :description="
+          isSearching ? '검색어와 일치하는 도시가 없습니다.' : '표시할 도시가 없습니다.'
+        "
       />
 
       <div v-else class="weather-list">
         <WeatherCard
-          v-for="weather in filteredWeatherList"
+          v-for="weather in displayList"
           :key="weather.id"
           :weather="weather"
           :selected="selectedCityInfo?.id === weather.id"
+          :region="isSearching ? weather.countryKo : ''"
           @select-card="selectCity"
           @click-detail="showDetails"
         />

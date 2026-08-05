@@ -11,6 +11,11 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  // 전역 검색 결과에서 국가명을 함께 보여줄 때 사용 (없으면 표시 안 함)
+  region: {
+    type: String,
+    default: '',
+  },
 })
 
 defineEmits(['select-card', 'click-detail'])
@@ -32,7 +37,10 @@ const isHot = computed(() => props.weather.temperature >= 25)
     @click="$emit('select-card', weather)"
   >
     <div class="card-top">
-      <h3>{{ weather.name }}</h3>
+      <div class="card-title">
+        <span v-if="region" class="region">{{ region }}</span>
+        <h3>{{ weather.name }}</h3>
+      </div>
       <span class="temp-tag" :class="isHot ? 'is-hot' : 'is-cool'">
         {{ isHot ? '더움' : '선선함' }}
       </span>
@@ -80,9 +88,18 @@ const isHot = computed(() => props.weather.temperature >= 25)
 
 .card-top {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: var(--s1);
+}
+
+.region {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--accent-dark);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 h3 {
