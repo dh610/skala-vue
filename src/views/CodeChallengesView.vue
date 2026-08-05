@@ -1,12 +1,10 @@
 <script setup>
-import { computed, defineAsyncComponent, ref, watchEffect } from 'vue'
+import { computed, defineAsyncComponent, watchEffect } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { challengeChapters, challenges, defaultChallengeId } from '../challenges/registry.js'
 
 const route = useRoute()
 const router = useRouter()
-
-const openPanels = ref(['requirements'])
 
 const activeChallenge = computed(
   () => challenges.find((challenge) => challenge.id === route.params.challengeId) ?? challenges[0],
@@ -17,10 +15,6 @@ const activeComponent = computed(() =>
 )
 
 /** 백틱으로 감싼 구간을 인라인 코드 칩으로 나눈다. (v-html 없이 안전하게 렌더링) */
-function toSegments(text) {
-  return text.split('`').map((value, index) => ({ value, code: index % 2 === 1 }))
-}
-
 function selectChallenge(challengeId) {
   router.push({ name: 'code-challenges', params: { challengeId } })
 }
@@ -76,34 +70,6 @@ watchEffect(() => {
           <h2>{{ activeChallenge.title }}</h2>
           <p>{{ activeChallenge.subtitle }}</p>
         </header>
-
-        <!-- 요구사항은 좌우 분할이 아니라 데모 위에 접이식으로 쌓는다 -->
-        <ElCollapse v-model="openPanels" class="requirement-collapse">
-          <ElCollapseItem name="requirements">
-            <template #title>
-              <span class="collapse-title">과제 요구사항</span>
-            </template>
-
-            <ul class="requirement-list">
-              <li v-for="(requirement, index) in activeChallenge.requirements" :key="index">
-                <span class="check" aria-hidden="true">✓</span>
-                <span>
-                  <template v-for="(segment, i) in toSegments(requirement)" :key="i">
-                    <code v-if="segment.code">{{ segment.value }}</code>
-                    <template v-else>{{ segment.value }}</template>
-                  </template>
-                </span>
-              </li>
-            </ul>
-
-            <p v-if="activeChallenge.hint" class="requirement-hint">
-              <template v-for="(segment, i) in toSegments(activeChallenge.hint)" :key="i">
-                <code v-if="segment.code">{{ segment.value }}</code>
-                <template v-else>{{ segment.value }}</template>
-              </template>
-            </p>
-          </ElCollapseItem>
-        </ElCollapse>
 
         <div v-if="activeChallenge.links" class="route-links">
           <RouterLink v-for="link in activeChallenge.links" :key="link.to" :to="link.to">
@@ -284,61 +250,6 @@ watchEffect(() => {
 }
 
 /* ---------- 요구사항 ---------- */
-.requirement-collapse {
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  background: var(--canvas);
-  overflow: hidden;
-}
-
-.requirement-collapse :deep(.el-collapse-item__header),
-.requirement-collapse :deep(.el-collapse-item__wrap) {
-  padding: 0 var(--s2);
-  border: 0;
-  background: transparent;
-}
-
-.requirement-collapse :deep(.el-collapse-item__content) {
-  padding-bottom: var(--s2);
-}
-
-.collapse-title {
-  color: var(--ink);
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.requirement-list {
-  display: grid;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.requirement-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--s1);
-  color: var(--ink-soft);
-  font-size: 13.5px;
-  line-height: 1.5;
-}
-
-.check {
-  flex: 0 0 auto;
-  color: var(--accent);
-  font-weight: 800;
-}
-
-.requirement-hint {
-  margin: var(--s2) 0 0;
-  padding-top: 12px;
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 12.5px;
-}
-
 /* ---------- 라우트 링크 ---------- */
 .route-links {
   display: flex;
